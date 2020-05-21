@@ -12,7 +12,7 @@ namespace BenefitsCostCalculator.Models
         [Display(Name = "Number of Dependents")]
         public int NumberOfDependents { get; set; }
         public List<DependentModel> Dependents { get; set; }
-        [Display(Name = "Total Cost per Year")]
+        [Display(Name = "Total Benefits Cost per Year")]
         public double TotalCost { get; set; }
     }
 }
