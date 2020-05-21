@@ -1,5 +1,9 @@
 ﻿var spouseCount = 1;
 var childCount = 1;
+var formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+});
 
 function employeeCreate() {
     var dependents = [];
@@ -21,7 +25,7 @@ function getDependents(prefix) {
         el.LastName = document.getElementById(prefix + i + 'lname').value;
         el.IsSpouse = prefix === 'spouse';
 
-        if (el.FirstName && el.LastName && dependents.indexOf(el) !== -1) {
+        if (el.FirstName && el.LastName && dependents.indexOf(el) == -1) {
             dependents.push(el);
         }
     }
@@ -69,7 +73,7 @@ function setTotalCost() {
     var totalCosts = calculateEmployeeCost() + sumDependentCosts();
     var totalCostsDiv = document.getElementById('totalCost');
     totalCostsDiv.value = totalCosts;
-    totalCostsDiv.innerHTML = '$' + totalCosts.toFixed(2);
+    totalCostsDiv.innerHTML = formatter.format(totalCosts);
 }
 
 function calculateEmployeeCost() {
@@ -78,10 +82,10 @@ function calculateEmployeeCost() {
 
     if (firstName.trim().toLowerCase().startsWith('a')) {
         employeeCostDiv.value = 900;
-        employeeCostDiv.innerHTML = '$900.00';
+        employeeCostDiv.innerHTML = formatter.format(900);
     } else {
         employeeCostDiv.value = 1000;
-        employeeCostDiv.innerHTML = '$1,000.00';
+        employeeCostDiv.innerHTML = formatter.format(1000);
     }
 
     return employeeCostDiv.value;
