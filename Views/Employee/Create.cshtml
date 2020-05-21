@@ -1,0 +1,73 @@
+﻿@model BenefitsCostCalculator.Models.EmployeeModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Add New Employee</h1>
+
+<h4>Employee Information</h4>
+<hr />
+@Html.HiddenFor(m => m.NumberOfDependents)
+<div class="form-row">
+        <form id="newEmployeeForm" asp-action="Create">
+            <div class="row">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="FirstName" class="control-label"></label>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastName" class="control-label"></label>
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+            </div>
+            @Html.Hidden("dependents")
+            <hr />
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Spouse(s)</h4>
+                    <div id="spouses">
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="spouse0fname" class="control-label">First Name</label>
+                                <input type="text" id="spouse0fname" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label for="spouse0lname" class="control-label">Last Name</label>
+                                <input type="text" id="spouse0lname" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <input type="button" value="Add(+) Spouse" class="btn btn-secondary" onclick="addDependent('spouses')" />
+                </div>
+                <div class="col-md-6">
+                    <h4>Child(ren)</h4>
+                    <div id="children">
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="child0fname" class="control-label">First Name</label>
+                                <input type="text" id="child0fname" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label for="child0lname" class="control-label">Last Name</label>
+                                <input type="text" id="child0lname" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <input type="button" value="Add(+) Child" class="btn btn-secondary" onclick="addDependent('children')" />
+                </div>
+            </div>
+            <hr/>
+            <div class="form-group">
+                <input type="button" value="Submit" class="btn btn-primary" onclick="employeeCreate()" />
+            </div>
+        </form>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
