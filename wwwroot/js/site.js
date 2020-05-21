@@ -1,5 +1,6 @@
 ﻿var spouseCount = 1;
 var childCount = 1;
+var employeeBasePay = 2000;
 var formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
@@ -72,8 +73,19 @@ function addDependent(type) {
 function setTotalCost() {
     var totalCosts = calculateEmployeeCost() + sumDependentCosts();
     var totalCostsDiv = document.getElementById('totalCost');
+    var perPaycheckCosts = totalCosts / 26;
+    var perPaycheckCostsDiv = document.getElementById('perPaycheckCost');
+    var employeePay = employeeBasePay - perPaycheckCosts;
+    var employeePayDiv = document.getElementById('perPaycheck');
+
     totalCostsDiv.value = totalCosts;
     totalCostsDiv.innerHTML = formatter.format(totalCosts);
+
+    perPaycheckCostsDiv.value = perPaycheckCosts;
+    perPaycheckCostsDiv.innerHTML = formatter.format(perPaycheckCosts);
+
+    employeePayDiv.value = employeePay;
+    employeePayDiv.innerHTML = formatter.format(employeePay)
 }
 
 function calculateEmployeeCost() {
