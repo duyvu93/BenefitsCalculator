@@ -10,61 +10,76 @@
 <hr />
 @Html.HiddenFor(m => m.NumberOfDependents)
 <div class="form-row">
-        <form id="newEmployeeForm" asp-action="Create">
-            <div class="row">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="FirstName" class="control-label"></label>
-                    <input asp-for="FirstName" class="form-control" />
-                    <span asp-validation-for="FirstName" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="LastName" class="control-label"></label>
-                    <input asp-for="LastName" class="form-control" />
-                    <span asp-validation-for="LastName" class="text-danger"></span>
-                </div>
-            </div>
-            @Html.Hidden("dependents")
-            <hr />
-            <div class="row">
-                <div class="col-md-6">
-                    <h4>Spouse(s)</h4>
-                    <div id="spouses">
-                        <div class="row">
-                            <div class="form-group">
-                                <label for="spouse0fname" class="control-label">First Name</label>
-                                <input type="text" id="spouse0fname" class="form-control" />
-                            </div>
-                            <div class="form-group">
-                                <label for="spouse0lname" class="control-label">Last Name</label>
-                                <input type="text" id="spouse0lname" class="form-control" />
-                            </div>
-                        </div>
-                    </div>
-                    <input type="button" value="Add(+) Spouse" class="btn btn-secondary" onclick="addDependent('spouses')" />
-                </div>
-                <div class="col-md-6">
-                    <h4>Child(ren)</h4>
-                    <div id="children">
-                        <div class="row">
-                            <div class="form-group">
-                                <label for="child0fname" class="control-label">First Name</label>
-                                <input type="text" id="child0fname" class="form-control" />
-                            </div>
-                            <div class="form-group">
-                                <label for="child0lname" class="control-label">Last Name</label>
-                                <input type="text" id="child0lname" class="form-control" />
-                            </div>
-                        </div>
-                    </div>
-                    <input type="button" value="Add(+) Child" class="btn btn-secondary" onclick="addDependent('children')" />
-                </div>
-            </div>
-            <hr/>
+    <form id="newEmployeeForm" asp-action="Create">
+        <div class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <input type="button" value="Submit" class="btn btn-primary" onclick="employeeCreate()" />
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" onblur="setTotalCost()"/>
+                <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
-        </form>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+        </div>
+        @Html.Hidden("dependents")
+        <hr />
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Spouse(s)</h4>
+                <div id="spouses">
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="spouse0fname" class="control-label">First Name</label>
+                            <input type="text" id="spouse0fname" class="form-control" onblur="setTotalCost()"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="spouse0lname" class="control-label">Last Name</label>
+                            <input type="text" id="spouse0lname" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <input type="button" value="Add(+) Spouse" class="btn btn-secondary" onclick="addDependent('spouses')" />
+            </div>
+            <div class="col-md-6">
+                <h4>Child(ren)</h4>
+                <div id="children">
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="child0fname" class="control-label">First Name</label>
+                            <input type="text" id="child0fname" class="form-control" onblur="setTotalCost()"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="child0lname" class="control-label">Last Name</label>
+                            <input type="text" id="child0lname" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <input type="button" value="Add(+) Child" class="btn btn-secondary" onclick="addDependent('children')" />
+            </div>
+        </div>
+    </form>
+</div>
+<hr />
+<h5>Cost Preview</h5>
+<div class="col-md-6">
+    <div class="row">
+        <label for="employeeCost" class="control-label">Employee Benefit Cost:&nbsp;</label>
+        <div id="employeeCost">$0.00</div>
+    </div>
+    <div class="row">
+        <label for="dependentCost" class="control-label">Dependent Cost:&nbsp;</label>
+        <div id="dependentCost">$0.00</div>
+    </div>
+    <div class="row">
+        <label for="totalCost" class="control-label">Total Cost:&nbsp;</label>
+        <div id="totalCost">$0.00</div>
+    </div>
+</div>
+<div class="form-group">
+    <input type="button" value="Submit" class="btn btn-primary" onclick="employeeCreate()" />
 </div>
 
 <div>
